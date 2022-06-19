@@ -1,0 +1,3 @@
+hi hello
+int a;
+float b;
