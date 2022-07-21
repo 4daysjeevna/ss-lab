@@ -1,20 +1,27 @@
 %{
 #include<stdio.h>
 %}
-%token L D NL
+%token NUM ID
+%left '+''-'
+%left '*''/'
 %%
-var: L E NL {printf("Valid Variable\n");return 0;}
-E: E L
-| E D
-| ;
+expr:e {printf("this is a valid expression\n"); exit(0);}
+e:e'+'e
+| e'-'e
+| e'*'e
+| e'/'e
+| '('e')'
+| NUM 
+| ID         ;
 %%
-int yyerror()
-{
-printf("\n Invalid Variable\n");
-return 0;
-}
 int main()
 {
-printf("\nEnter a variable\n");
+printf("Type the expression\n");
 yyparse();
+return 0;
+}
+int yyerror()
+{
+printf("invalid expression\n");
+exit(0);
 }
